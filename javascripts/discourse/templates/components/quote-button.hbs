@@ -1,0 +1,169 @@
+<div class="buttons">
+    {{#if embedQuoteButton}}
+        {{d-button
+                class="btn-flat insert-quote"
+                action=(action "insertQuote")
+                icon="quote-left"
+                label="post.quote_reply"}}
+    {{/if}}
+
+    {{#if quoteSharingEnabled}}
+        <span class="quote-sharing">
+      {{#if quoteSharingShowLabel}}
+          {{d-button
+                  icon="share"
+                  label="post.quote_share"
+                  class="btn-flat quote-share-label"}}
+      {{/if}}
+
+            <span class="quote-share-buttons">
+        {{#each quoteSharingSources as |source|}}
+            {{d-button
+                    class="btn-flat"
+                    action=(action "share" source)
+                    translatedTitle=source.title
+                    icon=source.icon}}
+        {{/each}}
+                {{plugin-outlet name="quote-share-buttons-after" tagName=""}}
+      </span>
+
+    </span>
+    {{/if}}
+
+    {{#if siteSettings.enable_fast_edit}}
+        {{#if _canEditPost}}
+            {{d-button
+                    icon="pencil-alt"
+                    action=(action "_toggleFastEditForm")
+                    label="post.quote_edit"
+                    class="btn-flat quote-edit-label"
+            }}
+        {{/if}}
+    {{/if}}
+
+    {{#if isAdmin}}
+        {{d-button
+                icon="discourse-bug"
+                action=(action "_toggleHansoftEditForm")
+                label=(theme-prefix 'menu.hansoft')
+                class="btn-flat quote-edit-label"
+        }}
+
+
+        {{d-button
+                icon="heart"
+                action=(action "_heartQuote")
+                label=(theme-prefix 'menu.like')
+                id="heart-quote"
+                class="btn-flat quote-edit-label"
+        }}
+        <!-- {{theme-i18n "hansoft.createbug"}}-->
+    {{/if}}
+</div>
+
+<div class="extra">
+    {{#if siteSettings.enable_fast_edit}}
+        {{#if _displayFastEditInput}}
+            <div class="fast-edit-container">
+                {{textarea
+                        id="fast-edit-input"
+                        value=_fastEditNewSelection
+                }}
+                {{d-button
+                        action=(action "_saveFastEdit")
+                        class="btn-small btn-primary save-fast-edit"
+                        icon="pencil-alt"
+                        label="composer.save_edit"
+                        disabled=_saveFastEditDisabled
+                        isLoading=_isSavingFastEdit
+                }}
+            </div>
+        {{/if}}
+    {{/if}}
+
+
+    <!--  desciption/title: provided by poster
+      description detailed: (which will be the selected text)
+      topic: (list of hansoft topics)
+      type: bug/task
+      assigned to: autoassign to qa person-->
+    {{#if _displayHansoftEditForm}}
+        <div class="hansoft-form-container fast-edit-container">
+
+            <div class="reporter-form-row">
+                <label for="hansoft-title">Title</label>
+                {{text-field id="hansoft-title" value=hansoftTitle disabled=false
+                             autocorrect="off" autocapitalize="off" }}
+            </div>
+
+            <div class="reporter-form-row">
+                <label for="hansoft-edit-input">Description</label>
+                {{textarea
+                        id="hansoft-edit-input"
+                        value=_fastEditNewSelection
+                        class="hansoft-edit-input"
+                }}
+            </div>
+
+            <!--<div class="reporter-form-row form-radios-inline">
+                <label for="hansoft-assignedto">Ticket Type</label>
+                <div class="radios">
+                    <label class="radio-label" for="avatar-flair-image">
+                        {{radio-button name="hansoftTicketType" value=hansoftTypeTask selection=hansoftTypeTask }}
+                        <b>Task</b>
+                    </label>
+
+                    <label class="radio-label" for="avatar-flair-icon">
+                        {{radio-button name="hansoftTicketType"  value=hansoftTypeBug }}
+                        <b>Bug</b>
+                    </label>
+                </div>
+            </div>
+
+            <div class="reporter-form-row">
+                <label for="hansoft-assignedto">Topic</label>
+                {{combo-box
+                        content=topics
+                        value=hansoftTopic
+                        class="hansoft-selector"
+                        none=(theme-prefix 'hansoft.labelTypeNone')
+                        id="hansoft-type"
+                        onChange=(action (mut hansoftTopic))
+                }}
+            </div>-->
+
+            <div class="reporter-form-row">
+                <label for="hansoft-assignedto">Assigned to</label>
+                {{combo-box
+                        content=users
+                        value=hansoftAssignedTo
+                        class="hansoft-selector"
+                        none=(theme-prefix 'hansoft.labelTypeNone')
+                        id="hansoft-assignedto"
+                        onChange=(action (mut hansoftAssignedTo))
+                }}
+            </div>
+
+            <div class="reporter-form-row">
+                <label for="hansoft-reporter">Reporter</label>
+                {{text-field id="hansoft-reporter" value=reporter-name disabled=true
+                             autocorrect="off" autocapitalize="off" }}
+            </div>
+            <div class="reporter-form-row">
+                {{d-button
+                        class="btn-primary"
+                        icon="check"
+                        label=(theme-prefix 'hansoft.submitbug')
+                        disabled=false
+                        isLoading=_isSavingFastEdit
+                        action=(action "_saveHansoftFormAndDecorateQuote")
+                }}
+            </div>
+        </div>
+    {{/if}}
+
+    {{plugin-outlet name="quote-button-after" tagName=""}}
+</div>
+
+
+

@@ -1,0 +1,1278 @@
+<script
+        type="text/x-handlebars"
+        data-template-name="/connectors/discovery-list-container-top/customized-topics-list">
+
+    {{#if displayPinnedTopics}}
+        <div class="custom-featured-topics-wrapper custom-featured-topics-wrapper--collapsible {{if expandedPinnedTopics
+                                                                                                    "custom-featured-topics-wrapper--expanded"
+                                                                                                    "null"}}"
+             data-type="LatestPinnedTopics">
+            <div class="custom-featured-topics-wrapper-top">
+                <h2 class="topic-list-section-headline">
+                    Pinned
+                </h2>
+
+                <div class="topic-list-section-icon">{{d-icon "angle-down"}}</div>
+            </div>
+
+            {{#if expandedLatestPinnedTopics}}
+                {{conditional-loading-spinner condition=loadingPinnedTopics}}
+            {{/if}}
+
+            <div class="custom-featured-topics-wrapper-inner">
+
+                {{#unless loadingPinnedTopics}}
+                    {{topic-list topics=pinnedTopics showPosters=true }}
+                {{/unless}}
+            </div>
+        </div>
+        <br/>
+    {{/if}}
+
+    {{#if displayLatest1DayTopics}}
+        <div class="custom-featured-topics-wrapper custom-featured-topics-wrapper--collapsible {{if
+                expandedLatest1DayTopics "custom-featured-topics-wrapper--expanded" "null"}} {{if
+                readstateShowUnreadLatest1DayTopics "show-unread-topics" "show-all-topics"}}"
+             data-type="Latest1DayTopics">
+            <div class="custom-featured-topics-wrapper-top">
+                <h2 class="topic-list-section-headline">
+                    Today
+                </h2>
+                <div class="read-state-buttons">
+                    {{#if readstateShowUnreadLatest1DayTopics}}
+                        <button title="All" class=" btn-icon-text custom-featured-topics-btn-showall btn btn-text"
+                                type="button"><span class="d-button-label">All</span></button>
+                        <button title="Unread"
+                                class=" btn-icon-text custom-featured-topics-btn-showunread filter-active btn btn-text"
+                                type="button"><span class="d-button-label">Unread</span></button>
+                    {{else}}
+                        <button title="All"
+                                class=" btn-icon-text custom-featured-topics-btn-showall filter-active btn btn-text"
+                                type="button"><span class="d-button-label">All</span></button>
+                        <button title="Unread" class=" btn-icon-text custom-featured-topics-btn-showunread btn btn-text"
+                                type="button"><span class="d-button-label">Unread</span></button>
+                    {{/if}}
+                </div>
+
+                <div class="topic-list-section-icon">{{d-icon "angle-down"}}</div>
+            </div>
+            {{#if expandedLatest1DayTopics}}
+                {{conditional-loading-spinner condition=loadingLatest1DayTopics}}
+            {{/if}}
+            <div class="custom-featured-topics-wrapper-inner">
+                {{#unless loadingLatest1DayTopics}}
+                    {{topic-list topics=latest1DayTopics showPosters=true}}
+                {{/unless}}
+            </div>
+
+        </div>
+        <br/>
+    {{/if}}
+
+    {{#if displayLatest2DaysTopics}}
+        <div class="custom-featured-topics-wrapper custom-featured-topics-wrapper--collapsible {{if
+                expandedLatest2DaysTopics "custom-featured-topics-wrapper--expanded" "null"}}  {{if
+                readstateShowUnreadLatest2DaysTopics "show-unread-topics" "show-all-topics"}}"
+             data-type="Latest2DaysTopics">
+
+            <div class="custom-featured-topics-wrapper-top">
+                <h2 class="topic-list-section-headline">
+                    Yesterday
+                </h2>
+                <div class="read-state-buttons">
+                    {{#if readstateShowUnreadLatest2DaysTopics}}
+                        <button title="All" class=" btn-icon-text custom-featured-topics-btn-showall btn btn-text"
+                                type="button"><span class="d-button-label">All</span></button>
+                        <button title="Unread"
+                                class=" btn-icon-text custom-featured-topics-btn-showunread filter-active btn btn-text"
+                                type="button"><span class="d-button-label">Unread</span></button>
+                    {{else}}
+                        <button title="All"
+                                class=" btn-icon-text custom-featured-topics-btn-showall filter-active btn btn-text"
+                                type="button"><span class="d-button-label">All</span></button>
+                        <button title="Unread" class=" btn-icon-text custom-featured-topics-btn-showunread btn btn-text"
+                                type="button"><span class="d-button-label">Unread</span></button>
+                    {{/if}}
+                </div>
+
+                <div class="topic-list-section-icon">{{d-icon "angle-down"}}</div>
+            </div>
+
+            {{#if expandedLatest2DaysTopics}}
+                {{conditional-loading-spinner condition=loadingLatest2DaysTopics}}
+            {{/if}}
+
+            <div class="custom-featured-topics-wrapper-inner">
+                {{#unless loadingLatest2DaysTopics}}
+                    {{topic-list topics=latest2DaysTopics showPosters=true}}
+                {{/unless}}
+            </div>
+        </div>
+        <br/>
+    {{/if}}
+
+    {{#if displayLatest7DaysTopics}}
+        <div class="custom-featured-topics-wrapper custom-featured-topics-wrapper--collapsible {{if
+                expandedLatest7DaysTopics "custom-featured-topics-wrapper--expanded" "null"}}  {{if
+                readstateShowUnreadLatest7DaysTopics "show-unread-topics" "show-all-topics"}}"
+             data-type="Latest7DaysTopics">
+
+            <div class="custom-featured-topics-wrapper-top">
+                <h2 class="topic-list-section-headline">
+                    Last Week
+                </h2>
+                <div class="read-state-buttons">
+                    {{#if readstateShowUnreadLatest7DaysTopics}}
+                        <button title="All" class=" btn-icon-text custom-featured-topics-btn-showall btn btn-text"
+                                type="button"><span class="d-button-label">All</span></button>
+                        <button title="Unread"
+                                class=" btn-icon-text custom-featured-topics-btn-showunread filter-active btn btn-text"
+                                type="button"><span class="d-button-label">Unread</span></button>
+                    {{else}}
+                        <button title="All"
+                                class=" btn-icon-text custom-featured-topics-btn-showall filter-active btn btn-text"
+                                type="button"><span class="d-button-label">All</span></button>
+                        <button title="Unread" class=" btn-icon-text custom-featured-topics-btn-showunread btn btn-text"
+                                type="button"><span class="d-button-label">Unread</span></button>
+                    {{/if}}
+                </div>
+
+                <div class="topic-list-section-icon">{{d-icon "angle-down"}}</div>
+            </div>
+
+            {{#if expandedLatest7DaysTopics}}
+                {{conditional-loading-spinner condition=loadingLatest7DaysTopics}}
+            {{/if}}
+
+            <div class="custom-featured-topics-wrapper-inner">
+                {{#unless loadingLatest7DaysTopics}}
+                    {{topic-list topics=latest7DaysTopics showPosters=true}}
+                {{/unless}}
+            </div>
+        </div>
+        <br/>
+    {{/if}}
+
+    {{#if displayLatestMonthTopics}}
+        <div class="custom-featured-topics-wrapper custom-featured-topics-wrapper--collapsible {{if
+                expandedLatestMonthTopics "custom-featured-topics-wrapper--expanded" "null"}}  {{if
+                readstateShowUnreadLatestMonthTopics "show-unread-topics" "show-all-topics"}}"
+             data-type="LatestMonthTopics">
+
+            <div class="custom-featured-topics-wrapper-top">
+                <h2 class="topic-list-section-headline">
+                    Last Month
+                </h2>
+                <div class="read-state-buttons">
+                    {{#if readstateShowUnreadLatestMonthTopics}}
+                        <button title="All" class=" btn-icon-text custom-featured-topics-btn-showall btn btn-text"
+                                type="button"><span class="d-button-label">All</span></button>
+                        <button title="Unread"
+                                class=" btn-icon-text custom-featured-topics-btn-showunread filter-active btn btn-text"
+                                type="button"><span class="d-button-label">Unread</span></button>
+                    {{else}}
+                        <button title="All"
+                                class=" btn-icon-text custom-featured-topics-btn-showall filter-active btn btn-text"
+                                type="button"><span class="d-button-label">All</span></button>
+                        <button title="Unread" class=" btn-icon-text custom-featured-topics-btn-showunread btn btn-text"
+                                type="button"><span class="d-button-label">Unread</span></button>
+                    {{/if}}
+                </div>
+
+                <div class="topic-list-section-icon">{{d-icon "angle-down"}}</div>
+            </div>
+
+            {{#if expandedLatestMonthTopics}}
+                {{conditional-loading-spinner condition=loadingLatestMonthTopics}}
+            {{/if}}
+
+            <div class="custom-featured-topics-wrapper-inner">
+                {{#unless loadingLatestMonthTopics}}
+                    {{topic-list topics=latestMonthTopics showPosters=true}}
+                {{/unless}}
+            </div>
+        </div>
+        <br/>
+    {{/if}}
+
+    <h2 class="topic-list-section-headline">
+        Original Topicslist for comparison
+    </h2>
+</script>
+
+
+<!-- Create a custom view for the homepage topics lists
+    Pinned
+    Unread
+    Latest (all others)
+-->
+<script type="text/discourse-plugin" version="0.8">
+    return;
+    const ajax = require('discourse/lib/ajax').ajax;
+    const Topic = require('discourse/models/topic').default;
+    const TimeUtils = require("discourse/lib/time-utils").default;
+    const discourseDebounce = require("discourse-common/lib/debounce").default;
+    const user = api.getCurrentUser();
+    const timezone = user.timezone;
+
+    const READSTATES_UNREAD = 'unread';
+
+
+    // We're using ajax and the Topic model from Discourse
+
+    //7 Tech
+    //15 Forsaken
+    //25 Moon
+    //9 Story and Lore
+    //12 Combat
+    //22 Editor and Tools
+    //38 Misc
+
+
+    const categoryMapping = {
+        7: {
+            name: 'Tech',
+            parent: {
+                name: 'Tech',
+                id: 7,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        33: {
+            name: 'Frameworks',
+            parent: {
+                name: 'Tech',
+                id: 7,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        16: {
+            name: 'Graphics',
+            parent: {
+                name: 'Tech',
+                id: 7,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        11: {
+            name: 'Backend',
+            parent: {
+                name: 'Tech',
+                id: 7,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        20: {
+            name: 'Quantum',
+            parent: {
+                name: 'Tech',
+                id: 7,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        21: {
+            name: 'Platforms',
+            parent: {
+                name: 'Tech',
+                id: 7,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+
+        15: {
+            name: 'Forsaken',
+            parent: {
+                name: 'Forsaken',
+                id: 15,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        26: {
+            name: 'UI',
+            parent: {
+                name: 'Forsaken',
+                id: 15,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        10: {
+            name: 'Levels',
+            parent: {
+                name: 'Forsaken',
+                id: 15,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        13: {
+            name: 'Systems',
+            parent: {
+                name: 'Forsaken',
+                id: 15,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        27: {
+            name: 'Balance and Progression:15',
+            parent: {
+                name: 'Forsaken',
+                id: 15,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        35: {
+            name: 'Shared Play',
+            parent: {
+                name: 'Forsaken',
+                id: 15,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+
+        25: {
+            name: 'Moon',
+            parent: {
+                name: 'Moon',
+                id: 25,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        41: {
+            name: 'Updates',
+            parent: {
+                name: 'Moon',
+                id: 25,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        42: {
+            name: 'Recordings',
+            parent: {
+                name: 'Moon',
+                id: 25,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        31: {
+            name: 'QA',
+            parent: {
+                name: 'Moon',
+                id: 25,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        29: {
+            name: 'Production',
+            parent: {
+                name: 'Moon',
+                id: 25,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        30: {
+            name: 'Process',
+            parent: {
+                name: 'Moon',
+                id: 25,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        36: {
+            name: 'Playthroughs',
+            parent: {
+                name: 'Moon',
+                id: 25,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+
+        9: {
+            name: 'Story and Lore',
+            parent: {
+                name: 'Story and Lore',
+                id: 9,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        28: {
+            name: 'Quests',
+            parent: {
+                name: 'Story and Lore',
+                id: 9,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        43: {
+            name: 'Cinematics',
+            parent: {
+                name: 'Story and Lore',
+                id: 9,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        44: {
+            name: 'Cinettes',
+            parent: {
+                name: 'Story and Lore',
+                id: 9,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        46: {
+            name: 'NPCs',
+            parent: {
+                name: 'Story and Lore',
+                id: 9,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        45: {
+            name: 'Vignettes',
+            parent: {
+                name: 'Story and Lore',
+                id: 9,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+
+        12: {
+            name: 'Combat',
+            parent: {
+                name: 'Combat',
+                id: 12,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        17: {
+            name: 'Bosses',
+            parent: {
+                name: 'Combat',
+                id: 12,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        14: {
+            name: 'Enemies',
+            parent: {
+                name: 'Combat',
+                id: 12,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        18: {
+            name: 'Weapons',
+            parent: {
+                name: 'Combat',
+                id: 12,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        32: {
+            name: 'Armor',
+            parent: {
+                name: 'Combat',
+                id: 12,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+
+        22: {
+            name: 'Editor and Tools',
+            parent: {
+                name: 'Editor and Tools',
+                id: 22,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        2: {
+            name: 'Forum',
+            parent: {
+                name: 'Editor and Tools',
+                id: 22,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        34: {
+            name: 'Apollo',
+            parent: {
+                name: 'Editor and Tools',
+                id: 22,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+
+        38: {
+            name: 'Misc',
+            parent: {
+                name: 'Misc',
+                id: 38,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        40: {
+            name: 'Hardware',
+            parent: {
+                name: 'Misc',
+                id: 38,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+
+        1: {
+            name: 'Uncategorized',
+            parent: {
+                name: 'Uncategorized',
+                id: 1,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        },
+        3: {
+            name: 'Staff',
+            parent: {
+                name: 'Staff',
+                id: 3,
+                topics_count_1day: 0,
+                topics_count_2days: 0,
+                topics_count_7days: 0,
+                topics_count_1month: 0
+            }
+        }
+    };
+
+    // eventhandlers for all/unread buttons
+    function nameCompare(a, b) {
+        return (categoryMapping[a.category_id].name > categoryMapping[b.category_id].name) ? 1 : ((categoryMapping[b.category_id].name > categoryMapping[a.category_id].name) ? -1 : 0)
+    }
+
+    function nameParentCompare(a, b) {
+        return (categoryMapping[a.category_id].parent.name > categoryMapping[b.category_id].parent.name) ? 1 : ((categoryMapping[b.category_id].parent.name > categoryMapping[a.category_id].parent.name) ? -1 : 0)
+    }
+
+    function nameParentCompareInverse(a, b) {
+        return (categoryMapping[a.category_id].parent.name > categoryMapping[b.category_id].parent.name) ? 1 : ((categoryMapping[b.category_id].parent.name > categoryMapping[a.category_id].parent.name) ? -1 : 0)
+    }
+
+    // sort it so that the categorie with the most recent topics is first, inside the group also sort by latest topics
+    function countParentTopicCompare1Day(a, b) {
+        const parentIdA = categoryMapping[a.category_id].parent.id;
+        const parentIdB = categoryMapping[b.category_id].parent.id;
+
+        if (categoryMapping[parentIdA].parent.topics_count_1day < categoryMapping[parentIdB].parent.topics_count_1day) {
+            return 1;
+        }
+        if (categoryMapping[parentIdA].parent.topics_count_1day > categoryMapping[parentIdB].parent.topics_count_1day) {
+            return -1;
+        }
+        return nameParentCompareInverse(a, b); // Internal group sorting
+    }
+
+    function countParentTopicCompare2Days(a, b) {
+        const parentIdA = categoryMapping[a.category_id].parent.id;
+        const parentIdB = categoryMapping[b.category_id].parent.id;
+
+        if (categoryMapping[parentIdA].parent.topics_count_2days < categoryMapping[parentIdB].parent.topics_count_2days) {
+            return 1;
+        }
+        if (categoryMapping[parentIdA].parent.topics_count_2days > categoryMapping[parentIdB].parent.topics_count_2days) {
+            return -1;
+        }
+        return nameParentCompareInverse(a, b); // Internal group sorting
+    }
+
+    function countParentTopicCompare7Days(a, b) {
+        const parentIdA = categoryMapping[a.category_id].parent.id;
+        const parentIdB = categoryMapping[b.category_id].parent.id;
+
+        if (categoryMapping[parentIdA].parent.topics_count_7days < categoryMapping[parentIdB].parent.topics_count_7days) {
+            return 1;
+        }
+        if (categoryMapping[parentIdA].parent.topics_count_7days > categoryMapping[parentIdB].parent.topics_count_7days) {
+            return -1;
+        }
+        return nameParentCompareInverse(a, b); // Internal group sorting
+    }
+
+    function countParentTopicCompareMonth(a, b) {
+        const parentIdA = categoryMapping[a.category_id].parent.id;
+        const parentIdB = categoryMapping[b.category_id].parent.id;
+
+        if (categoryMapping[parentIdA].parent.topics_count_1month < categoryMapping[parentIdB].parent.topics_count_1month) {
+            return 1;
+        }
+        if (categoryMapping[parentIdA].parent.topics_count_1month > categoryMapping[parentIdB].parent.topics_count_1month) {
+            return -1;
+        }
+        return nameParentCompareInverse(a, b); // Internal group sorting
+    }
+
+    // remember scroll location
+    function restoreScroll() {
+        var pos = window.localStorage.getItem("homeScrollPosition");
+        if (pos != 0) {
+            window.scrollTo(0, pos);
+        }
+    }
+
+    function saveScroll() {
+        discourseDebounce(this, function () {
+            if (window.scrollY != 0 && document.querySelector('html').classList.contains('custom-latest-topics')) {
+                window.localStorage.setItem("homeScrollPosition", window.scrollY + 1);
+            }
+        }, 400);
+    }
+
+    // Event handlers
+    // Click on headline to collapse/expand
+    $('html').on('click', '.custom-featured-topics-wrapper.custom-featured-topics-wrapper--collapsible .custom-featured-topics-wrapper-top', function (e) {
+
+        if (e.target.classList.contains('d-button-label') || e.target.classList.contains('btn')) return;
+        const $parent = $(this).parents('.custom-featured-topics-wrapper');
+        const type = $parent.attr('data-type');
+
+        window.localStorage.setItem(`topics-${type}-expanded`, !$parent.hasClass('custom-featured-topics-wrapper--expanded'))
+        $parent.toggleClass('custom-featured-topics-wrapper--expanded');
+    })
+
+    // Click All to filter for all topics
+    $('html').on('click', 'button.custom-featured-topics-btn-showall', function () {
+        const $parent = $(this).parents('.custom-featured-topics-wrapper');
+        const type = $parent.attr('data-type');
+
+        $parent.find('.btn').removeClass('filter-active');
+        $(this).addClass('filter-active');
+
+        $parent.removeClass('show-unread-topics show-all-topics');
+        $parent.addClass('show-all-topics');
+
+        window.localStorage.setItem(`topics-${type}-read-filter`, 'all')
+    })
+
+    // Click Unread to filter for all topics
+    $('html').on('click', 'button.custom-featured-topics-btn-showunread', function () {
+        const $parent = $(this).parents('.custom-featured-topics-wrapper');
+        const type = $parent.attr('data-type');
+
+        $parent.find('.btn').removeClass('filter-active');
+        $(this).addClass('filter-active');
+
+        $parent.removeClass('show-unread-topics show-all-topics');
+        $parent.addClass('show-unread-topics');
+
+        window.localStorage.setItem(`topics-${type}-read-filter`, 'unread')
+    })
+
+
+    //console.log('before api.registerConnectorClass');
+    api.registerConnectorClass('discovery-list-container-top', 'customized-topics-list', {
+        // above-main-container is the plugin outlet,
+        // featured-topics is your custom component name
+        shouldRender(args, component) {
+            console.log('args', args, component)
+            return true;
+        },
+        setupComponent(args, component) {
+            console.log('setupComponent');
+
+            api.onPageChange((url, title) => {
+                console.log('api.onPageChange');
+                if (url === "/" || url === "/latest") {
+                    // on page change, check if url matches
+                    // if your homepage isn't /latest change this to /categories
+                    console.log('api.onPageChange > latest or homepage');
+
+                    window.removeEventListener("scroll", saveScroll, {passive: true});
+                    window.addEventListener("scroll", saveScroll, {passive: true});
+
+                    $('html').addClass('custom-latest-topics');
+
+                    component.set('displayPinnedTopics', true);
+                    component.set('displayLatest1DayTopics', true);
+                    component.set('displayLatest2DaysTopics', true);
+                    component.set('displayLatest7DaysTopics', true);
+                    component.set('displayLatestMonthTopics', true);
+
+                    component.set('loadingPinnedTopics', true);
+                    component.set('loadingLatest1DayTopics', true);
+                    component.set('loadingLatest2DaysTopics', true);
+                    component.set('loadingLatest7DaysTopics', true);
+                    component.set('loadingLatestMonthTopics', true);
+
+                    // show the number of items per block
+                    component.set('totalPinnedTopics', 0);
+                    component.set('totalLatest1DayTopics', 0);
+                    component.set('totalLatest2DaysTopics', 0);
+                    component.set('totalLatest7DaysTopics', 0);
+                    component.set('totalLatestMonthTopics', 0);
+
+                    // Get expanded container local storage info
+                    component.set('expandedPinnedTopics', JSON.parse(window.localStorage.getItem(`topics-LatestPinnedTopics-expanded`)) === true);
+                    component.set('expandedLatest1DayTopics', JSON.parse(window.localStorage.getItem(`topics-Latest1DayTopics-expanded`)) === true);
+                    component.set('expandedLatest2DaysTopics', JSON.parse(window.localStorage.getItem(`topics-Latest2DaysTopics-expanded`)) === true);
+                    component.set('expandedLatest7DaysTopics', JSON.parse(window.localStorage.getItem(`topics-Latest7DaysTopics-expanded`)) === true);
+                    component.set('expandedLatestMonthTopics', JSON.parse(window.localStorage.getItem(`topics-LatestMonthTopics-expanded`)) === true);
+
+                    // Read toggle buttons state from local storage so that we can append the class on the container inline
+                    component.set('readstateLatest1DayTopics', window.localStorage.getItem(`topics-Latest1DayTopics-read-filter`));
+                    component.set('readstateLatest2DaysTopics', window.localStorage.getItem(`topics-Latest2DaysTopics-read-filter`));
+                    component.set('readstateLatest7DaysTopics', window.localStorage.getItem(`topics-Latest7DaysTopics-read-filter`));
+                    component.set('readstateLatestMonthTopics', window.localStorage.getItem(`topics-LatestMonthTopics-read-filter`));
+
+                    // show the number of items per block
+                    component.set('readstateShowUnreadLatest1DayTopics', window.localStorage.getItem(`topics-Latest1DayTopics-read-filter`) === READSTATES_UNREAD);
+                    component.set('readstateShowUnreadLatest2DaysTopics', window.localStorage.getItem(`topics-Latest2DaysTopics-read-filter`) === READSTATES_UNREAD);
+                    component.set('readstateShowUnreadLatest7DaysTopics', window.localStorage.getItem(`topics-Latest7DaysTopics-read-filter`) === READSTATES_UNREAD);
+                    component.set('readstateShowUnreadLatestMonthTopics', window.localStorage.getItem(`topics-LatestMonthTopics-read-filter`) === READSTATES_UNREAD);
+
+                    // use this to handle the topic queures with search.
+
+                    let latest1DayTopics = []; // last 2 days
+                    let latest2DaysTopics = []; // last 2 days
+                    let latest7DaysTopics = []; // last 7 days
+                    let latestMonthTopics = []; // this month minus, maybe with some overlap
+
+                    function doRequest(url) {
+                        ajax(url).then(processTopicEntries);
+                    }
+
+                    const processTopicEntries = (result) => {
+                        const featuredUsers = result.users;
+                        const hasMoreEntries = result.topic_list.more_topics_url;
+                        let shouldLoadMore = hasMoreEntries;
+
+                        let process1dayDone = false;
+                        let sorting1dayDone = false;
+                        let completed1dayDone = false;
+                        let process2daysDone = false;
+                        let sorting2daysDone = false;
+                        let completed2daysDone = false;
+                        let process7daysDone = false;
+                        let sorting7daysDone = false;
+                        let completed7daysDone = false;
+                        let processMonthDone = false;
+                        let sortingMonthDone = false;
+                        let completedMonthDone = false;
+
+                        result.topic_list.topics.forEach(function (topic) {
+                            const topicCreatedAt = topic.created_at;
+                            const topicLastPostedAt = topic.bumped_at;
+                            const topicPinned = topic.pinned;
+
+                            if (topicPinned) return;
+
+                            topic.posters.forEach(function (poster) {
+                                poster.user = $.grep(featuredUsers, function (e) {
+                                    return e.id == poster.user_id;
+                                })[0];
+                            });
+
+                            const createdTopic = Topic.create(topic);
+
+                            // create time points in time with timeUtils and base on now() and timezone.
+                            // todo make today and yesterday start on 6am to 12pm
+                            const date1DayAgo = TimeUtils.startOfDay(TimeUtils.now(timezone).subtract(1, "days").endOf('day'));
+                            const today = TimeUtils.startOfDay(TimeUtils.now(timezone).startOf('day'));
+                            const date2DaysAgo = TimeUtils.startOfDay(TimeUtils.now(timezone).subtract(2, "days").endOf('day'));
+                            const yesterday = TimeUtils.startOfDay(TimeUtils.now(timezone).subtract(1, "days").startOf('day'));
+
+                            const date7DaysAgo = TimeUtils.startOfDay(TimeUtils.now(timezone).subtract(7, "days").endOf('day'));
+                            const week = TimeUtils.startOfDay(TimeUtils.now(timezone).subtract(7, "days").startOf('day'));
+                            const dateMonthAgo = TimeUtils.startOfDay(TimeUtils.now(timezone).subtract(31, "days").endOf('day'));
+                            const month = TimeUtils.startOfDay(TimeUtils.now(timezone).subtract(31, "days").endOf('day'));
+
+                            // create new normalized JS dates
+                            const jDate1DayAgo = new Date(today);
+                            const jDate2DaysAgo = new Date(yesterday);
+                            const jDate7DaysAgo = new Date(week);
+                            const jDateMonthAgo = new Date(month);
+                            const jDateCreatedAt = new Date(topicCreatedAt);
+                            const jDateLastPostedAt = new Date(topicLastPostedAt);
+
+                            // parse the JS dates with momentjs for better manipulation
+                            const momentDate1DayAgo = moment(jDate1DayAgo);
+                            const momentDate2DaysAgo = moment(jDate2DaysAgo);
+                            const momentDate7DaysAgo = moment(jDate7DaysAgo);
+                            const momentMonthAgo = moment(jDateMonthAgo);
+                            const momentDateTopicCreatedAt = moment(jDateCreatedAt);
+                            const momentDateTopicLastPostedAt = moment(jDateLastPostedAt);
+
+                            // Define the ranges for the individual categories.
+                            const isInRange1DayOld = momentDateTopicCreatedAt.isAfter(momentDate1DayAgo) || momentDateTopicLastPostedAt.isAfter(momentDate1DayAgo);
+                            // Remove today from 2 days range
+                            const isInRange2DaysOld = (momentDateTopicCreatedAt.isAfter(momentDate2DaysAgo) && momentDateTopicCreatedAt.isBefore(momentDate1DayAgo) || momentDateTopicLastPostedAt.isAfter(momentDate2DaysAgo) && momentDateTopicLastPostedAt.isBefore(momentDate1DayAgo));
+                            // Remove today and yesterday from 7 days range
+                            const isInRange7DaysOld = momentDateTopicCreatedAt.isAfter(momentDate7DaysAgo) && momentDateTopicCreatedAt.isBefore(momentDate2DaysAgo) || momentDateTopicLastPostedAt.isAfter(momentDate7DaysAgo) && momentDateTopicLastPostedAt.isBefore(momentDate2DaysAgo);
+                            // Remove today and yesterday, 7 days from month range
+                            const isInRange1MonthOld = momentDateTopicCreatedAt.isAfter(momentMonthAgo) && momentDateTopicCreatedAt.isBefore(momentDate7DaysAgo) || momentDateTopicLastPostedAt.isAfter(momentMonthAgo) && momentDateTopicLastPostedAt.isBefore(momentDate7DaysAgo);
+
+                            console.log({isInRange1DayOld, isInRange2DaysOld})
+
+
+                            // check when a topic fits into a date range and then push it to the relevan array for later sorting.
+                            if (isInRange1DayOld) {
+                                console.log("Today", createdTopic.slug);
+                                latest1DayTopics.push(createdTopic);
+                                // keep track of how many topics a category gets per time bracket (day, yesterday, week, month) because its used for later sorting.
+                                categoryMapping[categoryMapping[createdTopic.category_id].parent.id].parent.topics_count_1day++;
+                            } else if (isInRange2DaysOld) {
+                                console.log("Yesterday", createdTopic.slug);
+                                latest2DaysTopics.push(createdTopic);
+                                categoryMapping[categoryMapping[createdTopic.category_id].parent.id].parent.topics_count_2days++;
+                                process1dayDone = true;
+                            } else if (isInRange7DaysOld) {
+                                console.log("Week", createdTopic.slug);
+                                latest7DaysTopics.push(createdTopic);
+                                categoryMapping[categoryMapping[createdTopic.category_id].parent.id].parent.topics_count_7days++;
+                                process2daysDone = true;
+                            } else if (isInRange1MonthOld) {
+                                console.log("Month", createdTopic.slug);
+                                latestMonthTopics.push(createdTopic);
+                                categoryMapping[categoryMapping[createdTopic.category_id].parent.id].parent.topics_count_1month++;
+                                process7daysDone = true;
+                            } else {
+                                shouldLoadMore = false;
+                                processMonthDone = true;
+                                process1dayDone = true;
+                                process2daysDone = true;
+                                process7daysDone = true;
+
+                                // restore the scroll position
+                                restoreScroll();
+                            }
+
+                            // immediately sort when previous brackets is filled. and reveal.
+                            if (process1dayDone && !completed1dayDone) {
+                                console.log("Setting Today")
+                                latest1DayTopics.sort(countParentTopicCompare1Day);
+                                sorting1dayDone = true;
+                                component.set("totalLatest1DayTopics", latest1DayTopics.length);
+                                component.set('latest1DayTopics', latest1DayTopics);
+                                component.set('loadingLatest1DayTopics', false);
+                                completed1dayDone = true;
+                            } else if (process2daysDone && !completed2daysDone) {
+                                console.log("Setting Yesterday")
+                                latest2DaysTopics.sort(countParentTopicCompare2Days);
+                                sorting2daysDone = true;
+                                component.set("totalLatest2DaysTopics", latest2DaysTopics.length);
+                                component.set('latest2DaysTopics', latest2DaysTopics);
+                                component.set('loadingLatest2DaysTopics', false);
+                                completed2daysDone = true;
+                            } else if (process7daysDone && !completed7daysDone) {
+                                console.log("Setting Week")
+                                latest7DaysTopics.sort(countParentTopicCompare7Days);
+                                sorting7daysDone = true;
+                                component.set("totalLatest7DaysTopics", latest7DaysTopics.length);
+                                component.set('latest7DaysTopics', latest7DaysTopics);
+                                component.set('loadingLatest7DaysTopics', false);
+                                completed7daysDone = true;
+                            } else if (processMonthDone && !completedMonthDone) {
+                                console.log("Setting Month")
+                                latestMonthTopics.sort(countParentTopicCompareMonth)
+                                sortingMonthDone = true;
+                                component.set("totalLatestMonthTopics", latestMonthTopics.length);
+                                component.set('latestMonthTopics', latestMonthTopics);
+                                component.set('loadingLatestMonthTopics', false);
+                                completedMonthDone = true;
+                            }
+                        });
+
+                        if (!shouldLoadMore) {
+                            // set total amount of topics for each group
+                            // set results to variable for each group
+                        } else {
+                            doRequest(result.topic_list.more_topics_url);
+                        }
+                    }
+
+                    doRequest('/latest.json?no_definitions=true');
+
+                    ajax("/search.json?expanded=true&q=in%3Apinned").then(function (result) {
+                        const pinnedTopics = [];
+                        const topicIds = [];
+
+                        result.topics.forEach(function (topic, idx) {
+                            topicIds.push(topic.id);
+                        })
+
+                        $.ajax({
+                            url: `/latest.json?topic_ids=${topicIds.join(',')}`,
+                            dataType: 'json',
+                            success: function (response) {
+                                var featuredUsers = response.users;
+
+                                response.topic_list.topics.forEach(function (topic) {
+                                    // We're extracting the topics starting at 0 and ending at 4
+                                    // This means we'll show 3 total. Increase 4 to see more.
+
+                                    topic.posters.forEach(function (poster) {
+                                        poster.user = $.grep(featuredUsers, function (e) {
+                                            return e.id == poster.user_id;
+                                        })[0];
+                                    });
+                                    // Associate users with our topic
+
+                                    if (!topic.archived) {
+                                        pinnedTopics.push(Topic.create(topic));
+                                    }
+                                });
+
+                                pinnedTopics.sort((a, b) => (categoryMapping[a.category_id] > categoryMapping[b.category_id]) ? 1 : ((categoryMapping[b.category_id] > categoryMapping[a.category_id]) ? -1 : 0))
+
+                                component.set("loadingPinnedTopics", false);
+                                component.set('pinnedTopics', pinnedTopics);
+                                component.set('totalPinnedTopics', pinnedTopics.length);
+                                component.set('displayPinnedTopics', true);
+                            }
+                        })
+                    })
+                } else {
+                    $('html').removeClass('custom-latest-topics');
+
+                    component.set('displayPinnedTopics', false);
+                    component.set("displayLatest1DayTopics", false);
+                    component.set("displayLatest2DaysTopics", false);
+                    component.set("displayLatest7DaysTopics", false);
+                    component.set("displayLatestMonthTopics", false);
+
+                    window.removeEventListener("scroll", saveScroll, {passive: true,});
+                }
+            });
+        }
+    });
+</script>
+
+<!--script type="text/x-handlebars" data-template-name="discovery/topics">
+    {{#if this.redirectedReason}}
+        <div class="alert alert-info">{{this.redirectedReason}}</div>
+    {{/if}}
+
+    {{#if this.showEditWelcomeTopicBanner}}
+        <WelcomeTopicBanner/>
+    {{/if}}
+
+    <TopicDismissButtons @position="top" @selectedTopics={{this.selected}} @model={{this.model}}
+                         @showResetNew={{this.showResetNew}} @showDismissRead={{this.showDismissRead}}
+                         @resetNew={{action "resetNew"}} />
+
+    {{#if this.model.sharedDrafts}}
+        <TopicList @class="shared-drafts" @listTitle="shared_drafts.title" @top={{this.top}} @hideCategory="true"
+                   @category={{this.category}} @topics={{this.model.sharedDrafts}} @discoveryList={{true}} />
+    {{/if}}
+
+    {{#if this.top}}
+
+    {{else}}
+
+    {{/if}}
+
+    {{#if this.latest}}
+        <PluginOutlet @name="before-topic-list" @tagName="span" @connectorTagName="div" @args={{hash
+                category=this.category}} />
+    {{else}}
+        <DiscoveryTopicsList @model={{this.model}} @refresh={{action "refresh"}} @loadingComplete={{action
+                "loadingComplete"}} @incomingCount={{this.topicTrackingState.incomingCount}}
+                             @autoAddTopicsToBulkSelect={{this.autoAddTopicsToBulkSelect}}
+                             @bulkSelectEnabled={{this.bulkSelectEnabled}} @addTopicsToBulkSelect={{action
+                "addTopicsToBulkSelect"}} as |discoveryTopicList|>
+            {{#if this.top}}
+                <div class="top-lists">
+                    <PeriodChooser @period={{this.period}} @action={{action "changePeriod"}} @fullDay={{false}} />
+                </div>
+            {{else}}
+                {{#if this.topicTrackingState.hasIncoming}}
+                    <div class="show-more {{if this.hasTopics "has-topics"}}">
+                        <a tabindex="0" href {{action "showInserted"}} class="alert alert-info clickable">
+                            <CountI18n @key="topic_count_" @suffix={{this.topicTrackingState.filter}}
+                                       @count={{this.topicTrackingState.incomingCount}} />
+                        </a>
+                    </div>
+                {{/if}}
+            {{/if}}
+            <PluginOutlet @name="before-topic-list" @tagName="span" @connectorTagName="div" @args={{hash
+                    category=this.category}} />
+
+            {{#if this.hasTopics}}
+                <TopicList @highlightLastVisited={{true}} @top={{this.top}}
+                           @showTopicPostBadges={{this.showTopicPostBadges}} @showPosters={{true}}
+                           @canBulkSelect={{this.canBulkSelect}} @changeSort={{route-action "changeSort"}}
+                           @toggleBulkSelect={{action "toggleBulkSelect"}} @updateAutoAddTopicsToBulkSelect={{action
+                        "updateAutoAddTopicsToBulkSelect"}} @hideCategory={{this.model.hideCategory}}
+                           @order={{this.order}} @ascending={{this.ascending}}
+                           @bulkSelectEnabled={{this.bulkSelectEnabled}} @bulkSelectAction={{action "refresh"}}
+                           @selected={{this.selected}} @expandGloballyPinned={{this.expandGloballyPinned}}
+                           @expandAllPinned={{this.expandAllPinned}} @category={{this.category}}
+                           @topics={{this.model.topics}} @discoveryList={{true}} @scrollOnLoad={{true}}
+                           @onScroll={{discoveryTopicList.saveScrollPosition}} @focusLastVisitedTopic={{true}} />
+            {{/if}}
+
+            <PluginOutlet @name="after-topic-list" @tagName="span" @connectorTagName="div" @args={{hash
+                    category=this.category}} />
+        </DiscoveryTopicsList>
+    {{/if}}
+
+    {{#if this.unread}}
+
+    {{else}}
+
+    {{/if}}
+
+    <footer class="topic-list-bottom">
+        <ConditionalLoadingSpinner @condition={{this.model.loadingMore}} />
+        {{#if this.allLoaded}}
+            <TopicDismissButtons @position="bottom" @selectedTopics={{this.selected}} @model={{this.model}}
+                                 @showResetNew={{this.showResetNew}} @showDismissRead={{this.showDismissRead}}
+                                 @resetNew={{action "resetNew"}} />
+
+            <FooterMessage @education={{this.footerEducation}} @message={{this.footerMessage}}>
+                {{#if this.latest}}
+                    {{#if this.canCreateTopicOnCategory}}
+                        <DiscourseLinkedText @action={{route-action "createTopic"}} @text="topic.suggest_create_topic"/>
+                    {{/if}}
+                {{else if this.top}}
+                    <LinkTo @route="discovery.categories">{{i18n "topic.browse_all_categories"}}</LinkTo>
+                    ,
+                    <LinkTo @route="discovery.latest">{{i18n "topic.view_latest_topics"}}</LinkTo> {{i18n "or"}} {{i18n
+                        "filters.top.other_periods"}}
+                    <TopPeriodButtons @period={{this.period}} @action={{action "changePeriod"}} />
+                {{else}}
+                    <LinkTo @route="discovery.categories"> {{i18n "topic.browse_all_categories"}}</LinkTo> {{i18n "or"}}
+                    <LinkTo @route="discovery.latest">{{i18n "topic.view_latest_topics"}}</LinkTo>
+                {{/if}}
+            </FooterMessage>
+        {{/if}}
+    </footer>
+
+</script-->
+<!-- this adds the last posters time to search results on the advances search page. -->
+<script type="text/x-handlebars" data-template-name="components/search-result-entry">
+    <div class="author">
+        <a href={{this.post.userPath}} data-user-card={{this.post.username}}>
+            {{avatar this.post imageSize="large"}}
+        </a>
+    </div>
+
+    <div class="fps-topic">
+        <div class="topic">
+            {{#if this.bulkSelectEnabled}}
+                <TrackSelected @selectedList={{this.selected}} @selectedId={{this.post.topic}} @class="bulk-select"/>
+            {{/if}}
+
+            <a href={{this.post.url}} {{action "logClick" this.post.topic_id}}
+               class="search-link{{if this.post.topic.visited " visited"}}" role="heading" aria-level="2">
+                {{raw "topic-status" topic=this.post.topic showPrivateMessageIcon=true}}
+                <span class="topic-title">
+                    {{#if this.post.useTopicTitleHeadline}}
+                        {{html-safe this.post.topicTitleHeadline}}
+                    {{else}}
+                        <HighlightSearch @highlight={{this.highlightQuery}}>
+                            {{html-safe this.post.topic.fancyTitle}}
+                        </HighlightSearch>
+                    {{/if}}
+                </span>
+            </a>
+
+            <div class="search-category">
+                {{#if this.post.topic.category.parentCategory}}
+                    {{category-link this.post.topic.category.parentCategory}}
+                {{/if}}
+                {{category-link this.post.topic.category hideParent=true}}
+                {{#if this.post.topic}}
+                    {{discourse-tags this.post.topic}}
+                {{/if}}
+                <PluginOutlet @name="full-page-search-category" @tagName="span" @connectorTagName="div" @args={{hash
+                        post=this.post}} />
+            </div>
+        </div>
+
+        <div class="blurb container">
+            <span class="date">
+              {{format-date this.post.topic.last_posted_at format="tiny"}}
+                {{#if this.post.blurb}}
+                    <span class="separator">-</span>
+                {{/if}}
+            </span>
+
+            {{#if this.post.blurb}}
+                {{#if this.siteSettings.use_pg_headlines_for_excerpt}}
+                    {{html-safe this.post.blurb}}
+                {{else}}
+                    <HighlightSearch @highlight={{this.highlightQuery}}>
+                        {{html-safe this.post.blurb}}
+                    </HighlightSearch>
+                {{/if}}
+            {{/if}}
+        </div>
+
+        {{#if this.showLikeCount}}
+            {{#if this.post.like_count}}
+                <span class="like-count">
+        <span class="value">{{this.post.like_count}}</span> {{d-icon "heart"}}
+      </span>
+            {{/if}}
+        {{/if}}
+    </div>
+
+</script>
+
+<script type="text/discourse-plugin" version="0.8.13">
+    api.reopenWidget("search-menu-results", {});
+
+</script>
+
+
+<!--<script type="text/x-handlebars" data-template-name="components/topic-list">
+
+{{plugin-outlet
+  name="before-topic-list-body"
+  args=(hash
+    topics=topics
+    selected=selected
+    bulkSelectEnabled=bulkSelectEnabled
+    lastVisitedTopic=lastVisitedTopic
+    discoveryList=discoveryList
+    hideCategory=hideCategory)
+  tagName=""
+  connectorTagName=""}}
+<tbody>
+    {{raw "topic-list-header"
+      canBulkSelect=canBulkSelect
+      toggleInTitle=toggleInTitle
+      hideCategory=hideCategory
+      showPosters=showPosters
+      showLikes=showLikes
+      showOpLikes=showOpLikes
+      showParticipants=showParticipants
+      order=order
+      ascending=ascending
+      sortable=sortable
+      listTitle=listTitle
+      bulkSelectEnabled=bulkSelectEnabled}}
+  {{#each filteredTopics as |topic|}}
+    {{topic-list-item topic=topic
+                      bulkSelectEnabled=bulkSelectEnabled
+                      showTopicPostBadges=showTopicPostBadges
+                      hideCategory=hideCategory
+                      showPosters=showPosters
+                      showParticipants=showParticipants
+                      showLikes=showLikes
+                      showOpLikes=showOpLikes
+                      expandGloballyPinned=expandGloballyPinned
+                      expandAllPinned=expandAllPinned
+                      lastVisitedTopic=lastVisitedTopic
+                      selected=selected
+                      tagsForUser=tagsForUser}}
+    {{raw "list/visited-line" lastVisitedTopic=lastVisitedTopic topic=topic}}
+  {{/each}}
+</tbody>
+
+</script>-->
+
+
+
+

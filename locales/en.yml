@@ -1,0 +1,10 @@
+en:
+  replies: Replies
+  activities: Activity
+  hansoft:
+    submitbug: Submit Ticket
+    labelType: Type
+    labelTypeNone: Please select...
+  menu:
+      like: Like
+      hansoft: Ticket
